@@ -1,0 +1,174 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * SKILLIA design system.
+ * Warm, modern African-inspired palette: deep teal, terracotta, gold sand.
+ * All colors are oklch semantic tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --radius-2xl: calc(var(--radius) + 12px);
+  --radius-3xl: calc(var(--radius) + 20px);
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-glow: var(--primary-glow);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-sand: var(--sand);
+  --color-sand-foreground: var(--sand-foreground);
+  --color-kids: var(--kids);
+  --color-kids-foreground: var(--kids-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.985 0.012 92);
+  --foreground: oklch(0.24 0.035 185);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.035 185);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.035 185);
+
+  --primary: oklch(0.45 0.09 190);
+  --primary-foreground: oklch(0.985 0.012 92);
+  --primary-glow: oklch(0.62 0.11 186);
+
+  --secondary: oklch(0.94 0.024 95);
+  --secondary-foreground: oklch(0.3 0.04 190);
+
+  --muted: oklch(0.955 0.014 95);
+  --muted-foreground: oklch(0.52 0.025 190);
+
+  --accent: oklch(0.62 0.15 45);
+  --accent-foreground: oklch(0.99 0.01 92);
+
+  --sand: oklch(0.82 0.11 80);
+  --sand-foreground: oklch(0.28 0.05 70);
+
+  --kids: oklch(0.7 0.16 320);
+  --kids-foreground: oklch(0.99 0.01 92);
+
+  --success: oklch(0.6 0.13 155);
+  --success-foreground: oklch(0.99 0.01 92);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0.01 92);
+
+  --border: oklch(0.9 0.018 95);
+  --input: oklch(0.9 0.018 95);
+  --ring: oklch(0.62 0.11 186);
+
+  --gradient-hero: linear-gradient(
+    140deg,
+    var(--primary) 0%,
+    var(--primary-glow) 55%,
+    var(--accent) 120%
+  );
+  --gradient-warm: linear-gradient(120deg, var(--accent), var(--sand));
+  --gradient-kids: linear-gradient(130deg, var(--kids), var(--accent));
+  --shadow-soft: 0 12px 32px -18px color-mix(in oklab, var(--primary) 45%, transparent);
+  --shadow-lift: 0 22px 50px -24px color-mix(in oklab, var(--primary) 55%, transparent);
+}
+
+.dark {
+  --background: oklch(0.19 0.028 200);
+  --foreground: oklch(0.96 0.012 92);
+  --card: oklch(0.24 0.03 200);
+  --card-foreground: oklch(0.96 0.012 92);
+  --popover: oklch(0.24 0.03 200);
+  --popover-foreground: oklch(0.96 0.012 92);
+  --primary: oklch(0.68 0.11 186);
+  --primary-foreground: oklch(0.19 0.028 200);
+  --primary-glow: oklch(0.78 0.1 186);
+  --secondary: oklch(0.3 0.03 200);
+  --secondary-foreground: oklch(0.96 0.012 92);
+  --muted: oklch(0.29 0.026 200);
+  --muted-foreground: oklch(0.72 0.02 190);
+  --accent: oklch(0.68 0.14 45);
+  --accent-foreground: oklch(0.19 0.028 200);
+  --sand: oklch(0.8 0.1 80);
+  --sand-foreground: oklch(0.2 0.03 70);
+  --kids: oklch(0.74 0.15 320);
+  --kids-foreground: oklch(0.19 0.028 200);
+  --success: oklch(0.68 0.12 155);
+  --success-foreground: oklch(0.19 0.028 200);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.68 0.11 186);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility bg-hero-gradient {
+  background-image: var(--gradient-hero);
+}
+
+@utility bg-warm-gradient {
+  background-image: var(--gradient-warm);
+}
+
+@utility bg-kids-gradient {
+  background-image: var(--gradient-kids);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+@utility text-gradient-warm {
+  background-image: var(--gradient-warm);
+  background-clip: text;
+  color: transparent;
+}
