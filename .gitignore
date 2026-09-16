@@ -3,6 +3,7 @@ node_modules
 .vinxi
 .vite
 dist
+/data
 *.local
 .env
 .env.*

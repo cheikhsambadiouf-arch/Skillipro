@@ -12,9 +12,14 @@ import {
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { I18nProvider } from "@/lib/i18n";
+import { getCurrentUserFn } from "@/server/functions";
 import appCss from "@/styles/app.css?url";
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    const user = await getCurrentUserFn();
+    return { user };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -27,10 +32,12 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const { user } = Route.useRouteContext();
+
   return (
     <RootDocument>
       <I18nProvider>
-        <SiteHeader />
+        <SiteHeader user={user} />
         <main className="min-h-screen">
           <Outlet />
         </main>

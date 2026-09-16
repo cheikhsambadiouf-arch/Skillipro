@@ -10,9 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as EntrepriseRouteImport } from './routes/entreprise'
+import { Route as InscriptionRouteImport } from './routes/inscription'
 import { Route as KidsRouteImport } from './routes/kids'
 import { Route as ParcoursRouteImport } from './routes/parcours'
+import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as TalentRouteImport } from './routes/talent'
 
 const IndexRoute = IndexRouteImport.update({
@@ -20,9 +23,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConnexionRoute = ConnexionRouteImport.update({
+  id: '/connexion',
+  path: '/connexion',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EntrepriseRoute = EntrepriseRouteImport.update({
   id: '/entreprise',
   path: '/entreprise',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InscriptionRoute = InscriptionRouteImport.update({
+  id: '/inscription',
+  path: '/inscription',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KidsRoute = KidsRouteImport.update({
@@ -35,6 +48,11 @@ const ParcoursRoute = ParcoursRouteImport.update({
   path: '/parcours',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RechercheRoute = RechercheRouteImport.update({
+  id: '/recherche',
+  path: '/recherche',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TalentRoute = TalentRouteImport.update({
   id: '/talent',
   path: '/talent',
@@ -43,39 +61,76 @@ const TalentRoute = TalentRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
   '/entreprise': typeof EntrepriseRoute
+  '/inscription': typeof InscriptionRoute
   '/kids': typeof KidsRoute
   '/parcours': typeof ParcoursRoute
+  '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
   '/entreprise': typeof EntrepriseRoute
+  '/inscription': typeof InscriptionRoute
   '/kids': typeof KidsRoute
   '/parcours': typeof ParcoursRoute
+  '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/connexion': typeof ConnexionRoute
   '/entreprise': typeof EntrepriseRoute
+  '/inscription': typeof InscriptionRoute
   '/kids': typeof KidsRoute
   '/parcours': typeof ParcoursRoute
+  '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/entreprise' | '/kids' | '/parcours' | '/talent'
+  fullPaths:
+    | '/'
+    | '/connexion'
+    | '/entreprise'
+    | '/inscription'
+    | '/kids'
+    | '/parcours'
+    | '/recherche'
+    | '/talent'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/entreprise' | '/kids' | '/parcours' | '/talent'
-  id: '__root__' | '/' | '/entreprise' | '/kids' | '/parcours' | '/talent'
+  to:
+    | '/'
+    | '/connexion'
+    | '/entreprise'
+    | '/inscription'
+    | '/kids'
+    | '/parcours'
+    | '/recherche'
+    | '/talent'
+  id:
+    | '__root__'
+    | '/'
+    | '/connexion'
+    | '/entreprise'
+    | '/inscription'
+    | '/kids'
+    | '/parcours'
+    | '/recherche'
+    | '/talent'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConnexionRoute: typeof ConnexionRoute
   EntrepriseRoute: typeof EntrepriseRoute
+  InscriptionRoute: typeof InscriptionRoute
   KidsRoute: typeof KidsRoute
   ParcoursRoute: typeof ParcoursRoute
+  RechercheRoute: typeof RechercheRoute
   TalentRoute: typeof TalentRoute
 }
 
@@ -88,11 +143,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/connexion': {
+      id: '/connexion'
+      path: '/connexion'
+      fullPath: '/connexion'
+      preLoaderRoute: typeof ConnexionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/entreprise': {
       id: '/entreprise'
       path: '/entreprise'
       fullPath: '/entreprise'
       preLoaderRoute: typeof EntrepriseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inscription': {
+      id: '/inscription'
+      path: '/inscription'
+      fullPath: '/inscription'
+      preLoaderRoute: typeof InscriptionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kids': {
@@ -109,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParcoursRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/recherche': {
+      id: '/recherche'
+      path: '/recherche'
+      fullPath: '/recherche'
+      preLoaderRoute: typeof RechercheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/talent': {
       id: '/talent'
       path: '/talent'
@@ -121,9 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConnexionRoute: ConnexionRoute,
   EntrepriseRoute: EntrepriseRoute,
+  InscriptionRoute: InscriptionRoute,
   KidsRoute: KidsRoute,
   ParcoursRoute: ParcoursRoute,
+  RechercheRoute: RechercheRoute,
   TalentRoute: TalentRoute,
 }
 export const routeTree = rootRouteImport

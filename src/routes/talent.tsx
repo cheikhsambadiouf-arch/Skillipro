@@ -1,8 +1,17 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
 import { Card, Chip, Progress, Section, SectionTitle } from "@/components/ui-bits";
 
 export const Route = createFileRoute("/talent")({
+  beforeLoad: ({ context, location }) => {
+    if (!context.user) {
+      throw redirect({ to: "/connexion", search: { redirect: location.href } });
+    }
+    if (context.user.role !== "talent") {
+      throw redirect({ to: `/${context.user.role}` });
+    }
+    return { user: context.user };
+  },
   head: () => ({
     meta: [
       { title: "Espace Talent SKILLIA — profil vivant et CV automatique" },
@@ -23,6 +32,7 @@ export const Route = createFileRoute("/talent")({
 
 function TalentPage() {
   const { t } = useI18n();
+  const { user } = Route.useRouteContext();
   const dash = t<string[]>("talent.dashboardItems");
   const sections = t<string[]>("talent.sections");
   const skills = t<{ name: string; level: string }[]>("talent.skills");
@@ -37,13 +47,16 @@ function TalentPage() {
         <Card>
           <div className="flex items-center gap-4">
             <span className="grid size-14 place-items-center rounded-2xl bg-hero-gradient text-xl text-primary-foreground">
-              MD
+              {user.name
+                .split(" ")
+                .map((part) => part[0])
+                .slice(0, 2)
+                .join("")
+                .toUpperCase()}
             </span>
             <div>
-              <h3 className="text-lg font-semibold">Mamadou Diop</h3>
-              <p className="text-sm text-muted-foreground">
-                Technicien électromécanicien · Thiès
-              </p>
+              <h3 className="text-lg font-semibold">{user.name}</h3>
+              <p className="text-sm text-muted-foreground">{user.email}</p>
             </div>
           </div>
           <div className="mt-6">

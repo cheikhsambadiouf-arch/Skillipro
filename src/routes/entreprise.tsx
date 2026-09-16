@@ -1,8 +1,17 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
 import { Card, Chip, Section, SectionTitle } from "@/components/ui-bits";
 
 export const Route = createFileRoute("/entreprise")({
+  beforeLoad: ({ context, location }) => {
+    if (!context.user) {
+      throw redirect({ to: "/connexion", search: { redirect: location.href } });
+    }
+    if (context.user.role !== "entreprise") {
+      throw redirect({ to: `/${context.user.role}` });
+    }
+    return { user: context.user };
+  },
   head: () => ({
     meta: [
       { title: "Espace Entreprise SKILLIA — trouver les bonnes compétences" },
@@ -65,6 +74,7 @@ const filters = [
 
 function CompanyPage() {
   const { t } = useI18n();
+  const { user } = Route.useRouteContext();
   const criteria = t<{ k: string; v: string }[]>("company.criteria");
   const why = t<string[]>("company.why");
   const pipeline = t<string[]>("company.pipeline");
@@ -72,7 +82,7 @@ function CompanyPage() {
   return (
     <Section>
       <SectionTitle
-        eyebrow="SKILLIA Entreprise"
+        eyebrow={`SKILLIA Entreprise · ${user.name}`}
         title={t("company.title")}
         desc={t("company.subtitle")}
       />

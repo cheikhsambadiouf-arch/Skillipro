@@ -45,16 +45,24 @@ function Index() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/talent"
+                to="/inscription"
+                search={{ role: "talent" }}
                 className="rounded-full bg-background px-6 py-3 text-base font-semibold text-foreground shadow-lift transition-transform hover:-translate-y-0.5"
               >
                 {t("cta.seeTalent")}
               </Link>
               <Link
-                to="/entreprise"
+                to="/inscription"
+                search={{ role: "entreprise" }}
                 className="rounded-full border border-primary-foreground/50 px-6 py-3 text-base font-semibold transition-colors hover:bg-primary-foreground/10"
               >
                 {t("cta.seeCompany")}
+              </Link>
+              <Link
+                to="/recherche"
+                className="rounded-full px-6 py-3 text-base font-semibold text-primary-foreground underline-offset-4 hover:underline"
+              >
+                {t("cta.searchNoAccount")}
               </Link>
             </div>
           </div>
@@ -97,7 +105,8 @@ function Index() {
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            to="/kids"
+            to="/inscription"
+            search={{ role: "kids" }}
             className="rounded-full bg-kids-gradient px-5 py-2.5 text-sm font-semibold text-kids-foreground"
           >
             {t("cta.seeKids")}

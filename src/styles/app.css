@@ -172,3 +172,21 @@
   background-clip: text;
   color: transparent;
 }
+
+@utility input-field {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  border-width: 1px;
+  border-color: var(--color-border);
+  background-color: var(--color-background);
+  padding-inline: 1rem;
+  padding-block: 0.75rem;
+  font-size: 1rem;
+  color: var(--color-foreground);
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-primary) 20%, transparent);
+  }
+}

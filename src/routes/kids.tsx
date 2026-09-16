@@ -1,8 +1,17 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
 import { Card, Chip, Progress, Section, SectionTitle } from "@/components/ui-bits";
 
 export const Route = createFileRoute("/kids")({
+  beforeLoad: ({ context, location }) => {
+    if (!context.user) {
+      throw redirect({ to: "/connexion", search: { redirect: location.href } });
+    }
+    if (context.user.role !== "kids") {
+      throw redirect({ to: `/${context.user.role}` });
+    }
+    return { user: context.user };
+  },
   head: () => ({
     meta: [
       { title: "SKILLIA Kids — apprendre, découvrir et jouer" },
@@ -23,6 +32,7 @@ export const Route = createFileRoute("/kids")({
 
 function KidsPage() {
   const { t } = useI18n();
+  const { user } = Route.useRouteContext();
   const steps = t<{ t: string; d: string }[]>("kids.steps");
   const interests = t<string[]>("kids.interests");
   const universes = t<{ n: string; v: number }[]>("kids.universes");
@@ -36,6 +46,7 @@ function KidsPage() {
       <section className="bg-kids-gradient text-kids-foreground">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h1 className="text-4xl font-bold sm:text-5xl">{t("kids.title")}</h1>
+          <p className="mt-2 text-lg font-semibold opacity-90">👋 {user.name}</p>
           <p className="mt-4 max-w-2xl text-lg opacity-90">{t("kids.subtitle")}</p>
         </div>
       </section>
