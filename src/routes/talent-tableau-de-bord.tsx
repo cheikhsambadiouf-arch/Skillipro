@@ -144,6 +144,9 @@ function TalentDashboardPage() {
           <Link to="/talent-cv" className="text-sm font-semibold text-primary hover:underline">
             Mon CV →
           </Link>
+          <Link to="/talent-portfolio" className="text-sm font-semibold text-primary hover:underline">
+            Portfolio & notes →
+          </Link>
         </div>
       </div>
 
