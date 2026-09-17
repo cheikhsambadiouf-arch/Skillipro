@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n";
 import { Card, Chip, Section, SectionTitle } from "@/components/ui-bits";
-import heroImage from "@/assets/skillia-hero.jpg";
+import heroImage from "@/assets/skillia-hero.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({

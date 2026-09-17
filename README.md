@@ -36,7 +36,7 @@ src/
 ├── styles/
 │   └── app.css            Design tokens (oklch), gradients, polices Sora/Manrope
 └── assets/
-    └── skillia-hero.jpg   Photo détourée du prototype, aplatie sur le fond du design system
+    └── skillia-hero.png   Photo détourée, fond réellement transparent (canal alpha)
 ```
 
 ## À vérifier / compléter
