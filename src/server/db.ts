@@ -81,5 +81,13 @@ export function getDb(): DatabaseSync {
   // candidature), assemblées depuis un modèle structuré (pas d'IA externe).
   ensureColumn(db, "talent_profiles", "cover_letters", "TEXT NOT NULL DEFAULT '[]'");
 
+  // Brique 6 — Carte de visite : entreprise (logo + nom) ou freelance (adresse),
+  // et le modèle visuel choisi (une seule carte par talent, comme le CV).
+  ensureColumn(db, "talent_profiles", "card_kind", "TEXT NOT NULL DEFAULT 'freelance'");
+  ensureColumn(db, "talent_profiles", "company_name", "TEXT NOT NULL DEFAULT ''");
+  ensureColumn(db, "talent_profiles", "company_logo_data_url", "TEXT NOT NULL DEFAULT ''");
+  ensureColumn(db, "talent_profiles", "address", "TEXT NOT NULL DEFAULT ''");
+  ensureColumn(db, "talent_profiles", "card_template", "TEXT NOT NULL DEFAULT 'classique'");
+
   return db;
 }

@@ -150,6 +150,9 @@ function TalentDashboardPage() {
           <Link to="/talent-lettre" className="text-sm font-semibold text-primary hover:underline">
             Lettres de motivation →
           </Link>
+          <Link to="/talent-carte" className="text-sm font-semibold text-primary hover:underline">
+            Carte de visite →
+          </Link>
         </div>
       </div>
 
