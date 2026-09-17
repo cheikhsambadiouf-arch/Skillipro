@@ -77,5 +77,9 @@ export function getDb(): DatabaseSync {
   ensureColumn(db, "talent_profiles", "portfolio_items", "TEXT NOT NULL DEFAULT '[]'");
   ensureColumn(db, "talent_profiles", "personal_notes", "TEXT NOT NULL DEFAULT '[]'");
 
+  // Brique 5 — Lettres de motivation : plusieurs lettres par talent (une par
+  // candidature), assemblées depuis un modèle structuré (pas d'IA externe).
+  ensureColumn(db, "talent_profiles", "cover_letters", "TEXT NOT NULL DEFAULT '[]'");
+
   return db;
 }

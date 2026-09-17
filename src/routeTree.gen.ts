@@ -18,6 +18,7 @@ import { Route as ParcoursRouteImport } from './routes/parcours'
 import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as TalentRouteImport } from './routes/talent'
 import { Route as TalentCvRouteImport } from './routes/talent-cv'
+import { Route as TalentLettreRouteImport } from './routes/talent-lettre'
 import { Route as TalentPortfolioRouteImport } from './routes/talent-portfolio'
 import { Route as TalentTableauDeBordRouteImport } from './routes/talent-tableau-de-bord'
 import { Route as ProfilIdRouteImport } from './routes/profil.$id'
@@ -67,6 +68,11 @@ const TalentCvRoute = TalentCvRouteImport.update({
   path: '/talent-cv',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TalentLettreRoute = TalentLettreRouteImport.update({
+  id: '/talent-lettre',
+  path: '/talent-lettre',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TalentPortfolioRoute = TalentPortfolioRouteImport.update({
   id: '/talent-portfolio',
   path: '/talent-portfolio',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
   '/talent-cv': typeof TalentCvRoute
+  '/talent-lettre': typeof TalentLettreRoute
   '/talent-portfolio': typeof TalentPortfolioRoute
   '/talent-tableau-de-bord': typeof TalentTableauDeBordRoute
   '/profil/$id': typeof ProfilIdRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
   '/talent-cv': typeof TalentCvRoute
+  '/talent-lettre': typeof TalentLettreRoute
   '/talent-portfolio': typeof TalentPortfolioRoute
   '/talent-tableau-de-bord': typeof TalentTableauDeBordRoute
   '/profil/$id': typeof ProfilIdRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
   '/talent-cv': typeof TalentCvRoute
+  '/talent-lettre': typeof TalentLettreRoute
   '/talent-portfolio': typeof TalentPortfolioRoute
   '/talent-tableau-de-bord': typeof TalentTableauDeBordRoute
   '/profil/$id': typeof ProfilIdRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/talent'
     | '/talent-cv'
+    | '/talent-lettre'
     | '/talent-portfolio'
     | '/talent-tableau-de-bord'
     | '/profil/$id'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/talent'
     | '/talent-cv'
+    | '/talent-lettre'
     | '/talent-portfolio'
     | '/talent-tableau-de-bord'
     | '/profil/$id'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/talent'
     | '/talent-cv'
+    | '/talent-lettre'
     | '/talent-portfolio'
     | '/talent-tableau-de-bord'
     | '/profil/$id'
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   RechercheRoute: typeof RechercheRoute
   TalentRoute: typeof TalentRoute
   TalentCvRoute: typeof TalentCvRoute
+  TalentLettreRoute: typeof TalentLettreRoute
   TalentPortfolioRoute: typeof TalentPortfolioRoute
   TalentTableauDeBordRoute: typeof TalentTableauDeBordRoute
   ProfilIdRoute: typeof ProfilIdRoute
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TalentCvRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/talent-lettre': {
+      id: '/talent-lettre'
+      path: '/talent-lettre'
+      fullPath: '/talent-lettre'
+      preLoaderRoute: typeof TalentLettreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/talent-portfolio': {
       id: '/talent-portfolio'
       path: '/talent-portfolio'
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   RechercheRoute: RechercheRoute,
   TalentRoute: TalentRoute,
   TalentCvRoute: TalentCvRoute,
+  TalentLettreRoute: TalentLettreRoute,
   TalentPortfolioRoute: TalentPortfolioRoute,
   TalentTableauDeBordRoute: TalentTableauDeBordRoute,
   ProfilIdRoute: ProfilIdRoute,

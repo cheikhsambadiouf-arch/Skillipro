@@ -147,6 +147,9 @@ function TalentDashboardPage() {
           <Link to="/talent-portfolio" className="text-sm font-semibold text-primary hover:underline">
             Portfolio & notes →
           </Link>
+          <Link to="/talent-lettre" className="text-sm font-semibold text-primary hover:underline">
+            Lettres de motivation →
+          </Link>
         </div>
       </div>
 
