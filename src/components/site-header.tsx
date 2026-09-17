@@ -16,6 +16,7 @@ export function SiteHeader({ user }: { user: CurrentUser | null }) {
   const [loggingOut, setLoggingOut] = useState(false);
 
   const dashboardLink = user ? (`/${user.role}` as const) : null;
+  const talentProfileLink = user?.role === "talent" ? ("/talent-tableau-de-bord" as const) : null;
 
   async function handleLogout() {
     setLoggingOut(true);
@@ -58,6 +59,15 @@ export function SiteHeader({ user }: { user: CurrentUser | null }) {
               className="rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-secondary-foreground"
             >
               {t("nav.dashboard")}
+            </Link>
+          )}
+          {talentProfileLink && (
+            <Link
+              to={talentProfileLink}
+              activeProps={{ className: "bg-secondary text-secondary-foreground" }}
+              className="rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-secondary-foreground"
+            >
+              {t("nav.myProfile")}
             </Link>
           )}
         </nav>
@@ -141,6 +151,16 @@ export function SiteHeader({ user }: { user: CurrentUser | null }) {
               className="rounded-xl px-3 py-3 text-base font-medium text-muted-foreground"
             >
               {t("nav.dashboard")}
+            </Link>
+          )}
+          {talentProfileLink && (
+            <Link
+              to={talentProfileLink}
+              onClick={() => setOpen(false)}
+              activeProps={{ className: "bg-secondary text-secondary-foreground" }}
+              className="rounded-xl px-3 py-3 text-base font-medium text-muted-foreground"
+            >
+              {t("nav.myProfile")}
             </Link>
           )}
           <div className="mt-2 flex items-center gap-1 rounded-full border border-border p-0.5 sm:hidden">
