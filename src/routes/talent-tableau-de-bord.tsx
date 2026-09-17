@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Card, Section, SectionTitle } from "@/components/ui-bits";
 import {
@@ -125,13 +125,23 @@ function TalentDashboardPage() {
           title="Mon profil"
           desc="Ces informations alimentent votre CV automatique et votre visibilité auprès des entreprises."
         />
-        <span
-          className={`text-sm font-semibold ${
-            status === "error" ? "text-destructive" : "text-muted-foreground"
-          }`}
-        >
-          {statusLabel[status]}
-        </span>
+        <div className="flex flex-col items-end gap-1">
+          <span
+            className={`text-sm font-semibold ${
+              status === "error" ? "text-destructive" : "text-muted-foreground"
+            }`}
+          >
+            {statusLabel[status]}
+          </span>
+          <Link
+            to="/profil/$id"
+            params={{ id: profile.id }}
+            target="_blank"
+            className="text-sm font-semibold text-primary hover:underline"
+          >
+            Voir mon profil public ↗
+          </Link>
+        </div>
       </div>
 
       {errorMessage && (
@@ -215,6 +225,10 @@ function TalentDashboardPage() {
               />
             </Field>
           </div>
+          <VisibilityToggle
+            checked={profile.publicShowSchool}
+            onChange={(v) => update("publicShowSchool", v)}
+          />
         </Card>
 
         <Card>
@@ -257,6 +271,10 @@ function TalentDashboardPage() {
           >
             + Ajouter une compétence
           </button>
+          <VisibilityToggle
+            checked={profile.publicShowSkills}
+            onChange={(v) => update("publicShowSkills", v)}
+          />
         </Card>
 
         <Card>
@@ -308,6 +326,10 @@ function TalentDashboardPage() {
               placeholder="Présentez-vous en quelques phrases…"
             />
           </div>
+          <VisibilityToggle
+            checked={profile.publicShowBio}
+            onChange={(v) => update("publicShowBio", v)}
+          />
         </Card>
 
         <div className="flex items-center gap-3">
@@ -325,6 +347,26 @@ function TalentDashboardPage() {
         </div>
       </div>
     </Section>
+  );
+}
+
+function VisibilityToggle({
+  checked,
+  onChange,
+}: {
+  checked: boolean;
+  onChange: (value: boolean) => void;
+}) {
+  return (
+    <label className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="size-4 rounded border-border"
+      />
+      Visible sur mon profil public
+    </label>
   );
 }
 

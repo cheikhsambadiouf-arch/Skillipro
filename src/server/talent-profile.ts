@@ -9,6 +9,7 @@ export interface TalentSkill {
 }
 
 export interface TalentProfile {
+  id: string;
   name: string;
   email: string;
   jobTitle: string;
@@ -21,6 +22,9 @@ export interface TalentProfile {
   phone: string;
   website: string;
   bio: string;
+  publicShowSkills: boolean;
+  publicShowSchool: boolean;
+  publicShowBio: boolean;
 }
 
 // Le contenu d'une photo encodée en data URL est stocké tel quel en base :
@@ -51,7 +55,7 @@ async function requireTalentUserId(): Promise<string> {
   return userId;
 }
 
-function parseSkills(raw: string): TalentSkill[] {
+export function parseSkills(raw: string): TalentSkill[] {
   try {
     const parsed = JSON.parse(raw);
     if (!Array.isArray(parsed)) return [];
@@ -68,13 +72,15 @@ export const getTalentProfileFn = createServerFn({ method: "GET" }).handler(
     const userId = await requireTalentUserId();
     const row = getDb()
       .prepare(
-        `SELECT u.name, u.email, t.domain, t.location, t.bio, t.job_title, t.school,
-                t.education_level, t.skills, t.phone, t.website, t.photo_data_url
+        `SELECT u.id, u.name, u.email, t.domain, t.location, t.bio, t.job_title, t.school,
+                t.education_level, t.skills, t.phone, t.website, t.photo_data_url,
+                t.public_show_skills, t.public_show_school, t.public_show_bio
          FROM users u JOIN talent_profiles t ON t.user_id = u.id
          WHERE u.id = ?`,
       )
       .get(userId) as
       | {
+          id: string;
           name: string;
           email: string;
           domain: string;
@@ -87,6 +93,9 @@ export const getTalentProfileFn = createServerFn({ method: "GET" }).handler(
           phone: string;
           website: string;
           photo_data_url: string;
+          public_show_skills: number;
+          public_show_school: number;
+          public_show_bio: number;
         }
       | undefined;
 
@@ -95,6 +104,7 @@ export const getTalentProfileFn = createServerFn({ method: "GET" }).handler(
     }
 
     return {
+      id: row.id,
       name: row.name,
       email: row.email,
       jobTitle: row.job_title,
@@ -107,6 +117,9 @@ export const getTalentProfileFn = createServerFn({ method: "GET" }).handler(
       phone: row.phone,
       website: row.website,
       bio: row.bio,
+      publicShowSkills: row.public_show_skills === 1,
+      publicShowSchool: row.public_show_school === 1,
+      publicShowBio: row.public_show_bio === 1,
     };
   },
 );
@@ -145,7 +158,8 @@ export const updateTalentProfileFn = createServerFn({ method: "POST" })
     db.prepare(
       `UPDATE talent_profiles
        SET domain = ?, location = ?, bio = ?, job_title = ?, school = ?,
-           education_level = ?, skills = ?, phone = ?, website = ?, photo_data_url = ?
+           education_level = ?, skills = ?, phone = ?, website = ?, photo_data_url = ?,
+           public_show_skills = ?, public_show_school = ?, public_show_bio = ?
        WHERE user_id = ?`,
     ).run(
       data.domain.trim(),
@@ -158,8 +172,11 @@ export const updateTalentProfileFn = createServerFn({ method: "POST" })
       data.phone.trim(),
       data.website.trim(),
       data.photoDataUrl,
+      data.publicShowSkills ? 1 : 0,
+      data.publicShowSchool ? 1 : 0,
+      data.publicShowBio ? 1 : 0,
       userId,
     );
 
-    return { ...data, name, email, skills };
+    return { ...data, id: userId, name, email, skills };
   });

@@ -18,6 +18,7 @@ import { Route as ParcoursRouteImport } from './routes/parcours'
 import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as TalentRouteImport } from './routes/talent'
 import { Route as TalentTableauDeBordRouteImport } from './routes/talent-tableau-de-bord'
+import { Route as ProfilIdRouteImport } from './routes/profil.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const TalentTableauDeBordRoute = TalentTableauDeBordRouteImport.update({
   path: '/talent-tableau-de-bord',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProfilIdRoute = ProfilIdRouteImport.update({
+  id: '/profil/$id',
+  path: '/profil/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
   '/talent-tableau-de-bord': typeof TalentTableauDeBordRoute
+  '/profil/$id': typeof ProfilIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
   '/talent-tableau-de-bord': typeof TalentTableauDeBordRoute
+  '/profil/$id': typeof ProfilIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/recherche': typeof RechercheRoute
   '/talent': typeof TalentRoute
   '/talent-tableau-de-bord': typeof TalentTableauDeBordRoute
+  '/profil/$id': typeof ProfilIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/talent'
     | '/talent-tableau-de-bord'
+    | '/profil/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/talent'
     | '/talent-tableau-de-bord'
+    | '/profil/$id'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/talent'
     | '/talent-tableau-de-bord'
+    | '/profil/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +157,7 @@ export interface RootRouteChildren {
   RechercheRoute: typeof RechercheRoute
   TalentRoute: typeof TalentRoute
   TalentTableauDeBordRoute: typeof TalentTableauDeBordRoute
+  ProfilIdRoute: typeof ProfilIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TalentTableauDeBordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/profil/$id': {
+      id: '/profil/$id'
+      path: '/profil/$id'
+      fullPath: '/profil/$id'
+      preLoaderRoute: typeof ProfilIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   RechercheRoute: RechercheRoute,
   TalentRoute: TalentRoute,
   TalentTableauDeBordRoute: TalentTableauDeBordRoute,
+  ProfilIdRoute: ProfilIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

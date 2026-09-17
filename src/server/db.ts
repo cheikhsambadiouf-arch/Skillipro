@@ -61,5 +61,10 @@ export function getDb(): DatabaseSync {
   ensureColumn(db, "talent_profiles", "website", "TEXT NOT NULL DEFAULT ''");
   ensureColumn(db, "talent_profiles", "photo_data_url", "TEXT NOT NULL DEFAULT ''");
 
+  // Brique 2 — Profil public : réglages de visibilité par champ (opt-in, 0 par défaut).
+  ensureColumn(db, "talent_profiles", "public_show_skills", "INTEGER NOT NULL DEFAULT 0");
+  ensureColumn(db, "talent_profiles", "public_show_school", "INTEGER NOT NULL DEFAULT 0");
+  ensureColumn(db, "talent_profiles", "public_show_bio", "INTEGER NOT NULL DEFAULT 0");
+
   return db;
 }
