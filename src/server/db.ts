@@ -66,5 +66,11 @@ export function getDb(): DatabaseSync {
   ensureColumn(db, "talent_profiles", "public_show_school", "INTEGER NOT NULL DEFAULT 0");
   ensureColumn(db, "talent_profiles", "public_show_bio", "INTEGER NOT NULL DEFAULT 0");
 
+  // Brique 3 — CV automatique : contenu propre au CV (non partagé avec le profil).
+  ensureColumn(db, "talent_profiles", "experiences", "TEXT NOT NULL DEFAULT '[]'");
+  ensureColumn(db, "talent_profiles", "languages", "TEXT NOT NULL DEFAULT '[]'");
+  ensureColumn(db, "talent_profiles", "certifications", "TEXT NOT NULL DEFAULT '[]'");
+  ensureColumn(db, "talent_profiles", "cv_template", "TEXT NOT NULL DEFAULT 'classique'");
+
   return db;
 }

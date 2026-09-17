@@ -141,6 +141,9 @@ function TalentDashboardPage() {
           >
             Voir mon profil public ↗
           </Link>
+          <Link to="/talent-cv" className="text-sm font-semibold text-primary hover:underline">
+            Mon CV →
+          </Link>
         </div>
       </div>
 
